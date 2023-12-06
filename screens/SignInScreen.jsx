@@ -18,13 +18,29 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { initializeApp } from "firebase/app";
+import { initializeApp, getApps } from "firebase/app";
+import { initializeAuth, getReactNativePersistence } from "firebase/auth";
 import { firebaseConfig } from "../firebaseConfig";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // Inicializamos Firebase fuera del componente para evitar re-inicializaciones en cada render
 
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+
+if (!getApps().length) {
+  initializeApp(firebaseConfig);
+}
+
+let auth;
+
+// Verifica si Auth ya ha sido inicializado
+if (!getAuth()) {
+  auth = initializeAuth(app, {
+    persistence: getReactNativePersistence(AsyncStorage),
+  });
+} else {
+  auth = getAuth();
+}
 
 export default function SignInScreen() {
   const navigation = useNavigation();
@@ -41,7 +57,7 @@ export default function SignInScreen() {
       .then((userCredential) => {
         console.log("Usuario ingresado con éxito!");
         const user = userCredential.user;
-        console.log(user);
+        console.log(user.email);
         navigation.navigate("Main"); // Navegar a la pantalla principal
       })
       .catch((error) => {

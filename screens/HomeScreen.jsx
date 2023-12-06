@@ -1,9 +1,26 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import React from "react";
+import React, { useEffect, useContext } from "react";
+import UserContext from "../contextos/UserProvider";
 import { useNavigation } from "@react-navigation/native";
+import { getAuth, signOut } from "firebase/auth";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function HomeScreen() {
   const navigation = useNavigation();
+  const auth = getAuth();
+
+  const handleSignOut = () => {
+    signOut(auth)
+      .then(() => {
+        // Navega a la pantalla SignInScreen después de cerrar sesión
+        navigation.navigate("SignIn");
+      })
+      .catch((error) => {
+        // Opcional: maneja cualquier error que ocurra durante el cierre de sesión
+        console.error(error);
+      });
+  };
+
   return (
     <View style={styles.container}>
       <View>
@@ -47,6 +64,13 @@ export default function HomeScreen() {
             </View>
           </TouchableOpacity>
         </View>
+      </View>
+      <View style={{ marginTop: 40 }}>
+        <TouchableOpacity onPress={handleSignOut}>
+          <View style={styles.registerBtn3}>
+            <Text style={styles.btnText}>Cerrar sesión</Text>
+          </View>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -92,6 +116,17 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 40,
     backgroundColor: "#81c3d3",
+    borderRadius: 10,
+    marginTop: 32,
+    marginLeft: 14,
+    alignItems: "center",
+    justifyContent: "center",
+    width: 300,
+  },
+  registerBtn3: {
+    paddingVertical: 10,
+    paddingHorizontal: 40,
+    backgroundColor: "#EB7D53",
     borderRadius: 10,
     marginTop: 32,
     marginLeft: 14,

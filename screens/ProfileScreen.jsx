@@ -13,6 +13,7 @@ import { useNavigation } from "@react-navigation/native";
 import { AntDesign } from "@expo/vector-icons";
 
 import DatePicker from "react-native-modern-datepicker";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function ProfileScreen() {
   const navigation = useNavigation();
@@ -48,6 +49,15 @@ export default function ProfileScreen() {
   };
 
   const { addProfile } = useContext(UserContext);
+
+  const saveProfileData = async (profileData) => {
+    try {
+      const jsonValue = JSON.stringify(profileData);
+      await AsyncStorage.setItem("@profile_data", jsonValue);
+    } catch (e) {
+      console.error("Error saving data", e);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -141,6 +151,7 @@ export default function ProfileScreen() {
               console.log(form);
               setErrorMessage("");
               addProfile(form);
+              saveProfileData(form);
               navigation.navigate("VaccineTracker");
             }
           }}

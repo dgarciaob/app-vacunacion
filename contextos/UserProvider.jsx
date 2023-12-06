@@ -42,6 +42,7 @@ export function UserProvider({ children }) {
       value={{
         profiles,
         addProfile,
+        setProfiles,
         editProfile,
         removeProfile,
         dateOfBirth,
