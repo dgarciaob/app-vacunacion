@@ -21,6 +21,7 @@ export default function ProfileScreen() {
   const [date, setDate] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
+  // Funciones para el DatePicker
   function handleOnPressDate() {
     setOpenDatePicker(!openDatePicker);
   }
@@ -32,6 +33,8 @@ export default function ProfileScreen() {
       date: propDate, // Asegura que la fecha se actualiza en el objeto form
     }));
   }
+
+  // funcion para llevar el estado del formulario. Se manejan todos los inputs en un solo estado.
 
   const [form, setForm] = useState({
     nombre: "",
@@ -47,6 +50,8 @@ export default function ProfileScreen() {
       [name]: value,
     });
   };
+
+  // funcion para guardar los datos del formulario en el AsyncStorage
 
   const { addProfile } = useContext(UserContext);
 
@@ -133,6 +138,8 @@ export default function ProfileScreen() {
             </View>
           </View>
         </Modal>
+
+        {/* Manejo de errores */}
 
         {errorMessage ? (
           <Text style={styles.errorText}>{errorMessage}</Text>

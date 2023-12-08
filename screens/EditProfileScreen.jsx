@@ -15,6 +15,8 @@ export default function EditProfileScreen({ route, navigation }) {
   const [editedProfile, setEditedProfile] = useState(profile);
   const { editProfile } = useContext(UserContext);
 
+  // Función para guardar los cambios en el perfil
+
   const handleSave = () => {
     editProfile(editedProfile);
     navigation.goBack();

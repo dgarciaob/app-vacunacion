@@ -9,6 +9,8 @@ export default function Vaccine1015() {
   const [modalVisible, setModalVisible] = useState();
   const [selectedVaccine, setSelectedVaccine] = useState(null);
 
+  // Función para mostrar el modal con la información de la vacuna seleccionada
+
   const handleVaccinePress = (vaccine) => {
     setSelectedVaccine(vaccine);
     setModalVisible(true);

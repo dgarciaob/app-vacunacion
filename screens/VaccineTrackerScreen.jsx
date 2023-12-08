@@ -10,6 +10,8 @@ export default function VaccineTrackerScreen() {
   const navigation = useNavigation();
   const { profiles, removeProfile, setActiveProfile } = useContext(UserContext);
 
+  // Funciones para editar y eliminar perfiles
+
   const handleEditProfile = (profile) => {
     navigation.navigate("EditProfileScreen", { profile });
   };

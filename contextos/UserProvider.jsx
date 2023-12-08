@@ -22,8 +22,10 @@ export function UserProvider({ children }) {
   };
 
   const setActiveProfile = (id) => {
-    setActiveProfileId(id);
+    setActiveProfileId(id); // para identificar el ID correspondiente al perfil activo
   };
+
+  // Función para editar un perfil
 
   const editProfile = (updatedProfile) => {
     setProfiles(
@@ -33,9 +35,13 @@ export function UserProvider({ children }) {
     );
   };
 
+  // Función para eliminar un perfil
+
   const removeProfile = (profileId) => {
     setProfiles(profiles.filter((profile) => profile.id !== profileId));
   };
+
+  // Devolvemos el Provider con el contexto creado y los valores que queremos pasar a los hijos. En este caso el "hijo" es toda el app (ver navigation.js).
 
   return (
     <UserContext.Provider

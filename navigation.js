@@ -168,6 +168,8 @@ function TabNavigator() {
   );
 }
 
+// toda la navegación esta envuelta en "UserProvider" para que todos los hijos puedan consumir el contexto creado en UserProvider.jsx
+
 export default function Navigation() {
   return (
     <UserProvider>

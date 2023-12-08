@@ -28,6 +28,7 @@ export default function ContactScreen() {
     latitudeDelta: 0.00422,
     longitudeDelta: 0.00321,
   };
+
   return (
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
